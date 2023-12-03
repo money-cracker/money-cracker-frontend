@@ -2,10 +2,14 @@ const webpack = require("webpack");
 
 module.exports = {
   mode: "development",
-  devtool: "eval-source-map",
+  devtool: "cheap-module-source-map",
+  devServer: {
+    hot: true,
+    open: true,
+  },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env.name": JSON.stringify("This is Dev"),
+      "process.env.name": JSON.stringify("Vishwas"),
     }),
   ],
 };
