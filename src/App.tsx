@@ -1,5 +1,13 @@
+import { ClickCounter } from "./ClickCounter";
 import "./styles.css";
 
 export const App = () => {
-  return <h1>React Typescript Webpack</h1>;
+  return (
+    <div>
+      <h1>
+        Hi React Typescript Webpack - {process.env.NODE_ENV} {process.env.name}
+      </h1>
+      <ClickCounter />
+    </div>
+  );
 };
