@@ -1,7 +1,8 @@
-import { ClickCounter } from "./ClickCounter";
-import "./styles.css";
+import { ClickCounter } from './ClickCounter'
+import './styles.css'
 
 export const App = () => {
+  const name = 'hi'
   return (
     <div>
       <h1>
@@ -9,5 +10,5 @@ export const App = () => {
       </h1>
       <ClickCounter />
     </div>
-  );
-};
+  )
+}
