@@ -29,7 +29,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            docker rm -f $(docker ps -qa)
-            docker rmi qkrtjdgh320/react-nginx:latest
             docker pull qkrtjdgh320/react-nginx:latest
+            docker stop -f $(docker ps -qa)
+            docker rm -f $(docker ps -qa)
             docker run -d --name react-nginx -p 80:80 qkrtjdgh320/react-nginx:latest
