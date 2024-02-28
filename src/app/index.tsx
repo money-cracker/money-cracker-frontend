@@ -1,5 +1,5 @@
-import { ClickCounter } from './ClickCounter'
-import './styles.css'
+import { ClickCounter } from './components/ClickCounter'
+import '../index.css'
 
 export const App = () => {
   return (
