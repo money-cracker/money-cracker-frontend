@@ -30,6 +30,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             docker pull qkrtjdgh320/react-nginx:latest
-            docker stop myapp || true
-            docker rm myapp || true
-            docker run -d --name myapp -p 80:80 qkrtjdgh320/react-nginx:latest
+            docker stop react-nginx || true
+            docker rm react-nginx || true
+            docker run -d --name react-nginx -p 80:80 qkrtjdgh320/react-nginx:latest
