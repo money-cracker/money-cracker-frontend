@@ -13,7 +13,7 @@ RUN npm run build
 FROM nginx:alpine
 # Set working directory to nginx asset directory
 COPY build/ /usr/share/nginx/html
-COPY defnginxault.conf /etc/nginx/conf.d/nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/nginx.conf
 EXPOSE 80
 # Remove default nginx static assets
 RUN rm -rf ./*
