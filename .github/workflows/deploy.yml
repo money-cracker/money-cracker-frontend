@@ -88,7 +88,7 @@ jobs:
 
       - name: Update AWS Security Group (allow)
         run: |
-          aws ec2 authorize-security-group-ingress --group-id YOUR_SECURITY_GROUP_ID --protocol tcp --port 22 --cidr ${{ steps.get-ip.outputs.runner_ip }}/32
+          aws ec2 authorize-security-group-ingress --group-id launch-wizard-1 --protocol tcp --port 22 --cidr ${{ steps.get-ip.outputs.runner_ip }}/32
         continue-on-error: true
 
       - name: Run deploy command
@@ -97,4 +97,4 @@ jobs:
       - name: Update AWS Security Group (revoke)
         if: always()
         run: |
-          aws ec2 revoke-security-group-ingress --group-id YOUR_SECURITY_GROUP_ID --protocol tcp --port 22 --cidr ${{ steps.get-ip.outputs.runner_ip }}/32
+          aws ec2 revoke-security-group-ingress --group-id launch-wizard-1 --protocol tcp --port 22 --cidr ${{ steps.get-ip.outputs.runner_ip }}/32
