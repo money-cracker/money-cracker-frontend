@@ -34,7 +34,7 @@
 #             docker rm money-cracker-frontend
 #             docker run -d --name money-cracker-frontend -p 80:80 qkrtjdgh320/react-nginx:latest
 
-name: CD
+name: Deploy React Web to EC2
 
 on:
   push:
@@ -72,5 +72,29 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v2
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+      - name: Get Runner's IP
+        id: get-ip
+        run: |
+          RUNNER_IP=$(curl http://checkip.amazonaws.com)
+          echo "Runner IP is $RUNNER_IP"
+          echo "::set-output name=runner_ip::$RUNNER_IP"
+
+      - name: Update AWS Security Group (allow)
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id YOUR_SECURITY_GROUP_ID --protocol tcp --port 22 --cidr ${{ steps.get-ip.outputs.runner_ip }}/32
+        continue-on-error: true
+
       - name: Run deploy command
         run: kamal deploy
+
+      - name: Update AWS Security Group (revoke)
+        if: always()
+        run: |
+          aws ec2 revoke-security-group-ingress --group-id YOUR_SECURITY_GROUP_ID --protocol tcp --port 22 --cidr ${{ steps.get-ip.outputs.runner_ip }}/32
