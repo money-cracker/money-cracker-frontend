@@ -1,0 +1,20 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Money Cracker",
+  "orientation": "portrait",
+  "scope": "moneycracker.shop",
+  "short_name": "Money Cracker",
+  "start_url": "moneycracker.shop",
+  "theme_color": "#9679e9",
+  "icons": [
+    {
+      "src": "./icons/192.png"
+    }
+  ],
+  "id": "moneycracker",
+  "description": "manage your money (wealth and budget) with money cracker. lets crack it down!",
+  "lang": "en",
+  "categories": ["lifestyle"]
+}
