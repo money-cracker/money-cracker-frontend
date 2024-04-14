@@ -1,13 +1,10 @@
 {
   "background_color": "#ffffff",
-  "dir": "ltr",
   "display": "standalone",
   "name": "Money Cracker",
   "orientation": "portrait",
   "scope": "moneycracker.shop",
   "short_name": "Money Cracker",
-  "start_url": "moneycracker.shop",
-  "theme_color": "#9679e9",
   "icons": [
     {
       "src": "./icons/72.png",
