@@ -4,7 +4,8 @@
 
 body {
   margin: 0px;
-  overscroll-behavior: none;
+  overscroll-behavior: contain;
+  overflow: hidden;
 }
 
 .App {
