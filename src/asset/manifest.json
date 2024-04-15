@@ -12,6 +12,11 @@
       "type": "image/png"
     },
     {
+      "src": "./icons/120.png",
+      "sizes": "120x120",
+      "type": "image/png"
+    },
+    {
       "src": "./icons/128.png",
       "sizes": "128x128",
       "type": "image/png"
@@ -19,6 +24,11 @@
     {
       "src": "./icons/144.png",
       "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/180.png",
+      "sizes": "180x1480",
       "type": "image/png"
     },
     {
