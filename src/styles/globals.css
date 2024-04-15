@@ -4,8 +4,6 @@
 
 body {
   margin: 0px;
-  overscroll-behavior: contain;
-  overflow: hidden;
 }
 
 .App {
@@ -15,7 +13,7 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: #fff9e5;
+  background-color: #ffffff;
 }
 
 .tab-navigator {
@@ -23,10 +21,13 @@ body {
   bottom: 0;
   display: flex;
   max-width: 480px;
+  height: 3.5rem;
   width: 100%;
   justify-content: space-around;
-  background: #ddd;
-  padding: 10px 0;
+  align-items: center;
+  background: #ffffff;
+  border-top: #dddddd 1px solid;
+  padding-bottom: 10px;
 }
 
 /* Styling links inside the navigator */
