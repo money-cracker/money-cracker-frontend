@@ -5,8 +5,8 @@
   "start_url": "/",
   "scope": "moneycracker.shop",
   "short_name": "Money Cracker",
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#FFB800",
+  "background_color": "#FFFDF6",
   "icons": [
     {
       "src": "./icons/120.png",

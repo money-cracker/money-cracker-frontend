@@ -4,16 +4,17 @@
 
 body {
   margin: 0px;
+  background-color: #fffdf6;
 }
 
 .App {
   max-width: 480px;
-  margin: auto;
   height: 100vh;
+  margin: auto;
   position: relative;
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: #fffdf6;
 }
 
 .tab-navigator {
@@ -34,4 +35,9 @@ body {
 .tab-navigator a {
   text-decoration: none;
   color: black;
+}
+
+.page {
+  margin: 16px;
+  padding-bottom: 3.5rem;
 }
