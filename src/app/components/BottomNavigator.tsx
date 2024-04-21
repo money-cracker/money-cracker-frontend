@@ -16,7 +16,7 @@ const BottomTabNavigator = () => {
       >
         <PhosphorIcon
           name="House"
-          weight={isActive('/') ? 'bold' : 'regular'}
+          weight={isActive('/home') ? 'bold' : 'regular'}
         />
       </Link>
       <Link
