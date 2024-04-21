@@ -5,6 +5,7 @@
 body {
   margin: 0px;
   background-color: #fffdf6;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 .App {
@@ -40,4 +41,8 @@ body {
 .page {
   margin: 16px;
   padding-bottom: 3.5rem;
+}
+
+*:focus {
+  outline: none;
 }
