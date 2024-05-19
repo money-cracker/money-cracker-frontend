@@ -1,76 +1,17 @@
-# name: Deploy to EC2
-
-# on:
-#   push:
-#     branches:
-#       - main # Trigger on push to main branch
-
-# jobs:
-#   build-and-deploy:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
-
-#       - name: Build Docker image
-#         run: docker build -t qkrtjdgh320/react-nginx:latest .
-
-#       - name: Log in to Docker Hub
-#         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-
-#       - name: Push Docker image to Docker Hub
-#         run: docker push qkrtjdgh320/react-nginx:latest
-
-#       - name: Deploy to EC2
-#         uses: appleboy/ssh-action@master
-#         with:
-#           host: ${{ secrets.HOST }}
-#           username: ${{ secrets.EC2_USER }}
-#           key: ${{ secrets.SSH_KEY }}
-#           script: |
-#             docker pull qkrtjdgh320/react-nginx:latest
-#             docker stop money-cracker-frontend
-#             docker rm money-cracker-frontend
-#             docker run -d --name money-cracker-frontend -p 80:80 qkrtjdgh320/react-nginx:latest
-
-name: Deploy React Web to EC2
+name: Deploy to EC2
 
 on:
   push:
     branches:
-      - main
+      - main # Trigger on push to main branch
 
 jobs:
-  Deploy:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+  build-and-deploy:
     runs-on: ubuntu-latest
-
-    env:
-      KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: 3.2.2
-          bundler-cache: true
-
-      - name: Install dependencies
-        run: |
-          gem install specific_install
-          gem specific_install https://github.com/basecamp/kamal.git
-
-      - uses: webfactory/ssh-agent@v0.7.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
-
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v2
+        uses: actions/checkout@v2
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -91,10 +32,93 @@ jobs:
           aws ec2 authorize-security-group-ingress --group-id sg-0b14a9c6bcfcc8701 --protocol tcp --port 22 --cidr ${{ steps.get-ip.outputs.runner_ip }}/32
         continue-on-error: true
 
-      - name: Run deploy command
-        run: kamal deploy
+      - name: Build Docker image
+        run: docker build -t qkrtjdgh320/react-nginx:latest .
+
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Push Docker image to Docker Hub
+        run: docker push qkrtjdgh320/react-nginx:latest
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            docker pull qkrtjdgh320/react-nginx:latest
+            docker stop money-cracker-frontend
+            docker rm money-cracker-frontend
+            docker run -d --name money-cracker-frontend -p 80:80 qkrtjdgh320/react-nginx:latest
 
       - name: Update AWS Security Group (revoke)
         if: always()
         run: |
           aws ec2 revoke-security-group-ingress --group-id sg-0b14a9c6bcfcc8701 --protocol tcp --port 22 --cidr ${{ steps.get-ip.outputs.runner_ip }}/32
+
+# name: Deploy React Web to EC2
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+# jobs:
+#   Deploy:
+#     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+#     runs-on: ubuntu-latest
+
+#     env:
+#       KAMAL_REGISTRY_PASSWORD: ${{ secrets.KAMAL_REGISTRY_PASSWORD }}
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Set up Ruby
+#         uses: ruby/setup-ruby@v1
+#         with:
+#           ruby-version: 3.2.2
+#           bundler-cache: true
+
+#       - name: Install dependencies
+#         run: |
+#           gem install specific_install
+#           gem specific_install https://github.com/basecamp/kamal.git
+
+#       - uses: webfactory/ssh-agent@v0.7.0
+#         with:
+#           ssh-private-key: ${{ secrets.SSH_KEY }}
+
+#       - name: Set up Docker Buildx
+#         id: buildx
+#         uses: docker/setup-buildx-action@v2
+
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+
+#       - name: Get Runner's IP
+#         id: get-ip
+#         run: |
+#           RUNNER_IP=$(curl http://checkip.amazonaws.com)
+#           echo "Runner IP is $RUNNER_IP"
+#           echo "::set-output name=runner_ip::$RUNNER_IP"
+
+#       - name: Update AWS Security Group (allow)
+#         run: |
+#           aws ec2 authorize-security-group-ingress --group-id sg-0b14a9c6bcfcc8701 --protocol tcp --port 22 --cidr ${{ steps.get-ip.outputs.runner_ip }}/32
+#         continue-on-error: true
+
+#       - name: Run deploy command
+#         run: kamal deploy
+
+#       - name: Update AWS Security Group (revoke)
+#         if: always()
+#         run: |
+#           aws ec2 revoke-security-group-ingress --group-id sg-0b14a9c6bcfcc8701 --protocol tcp --port 22 --cidr ${{ steps.get-ip.outputs.runner_ip }}/32
