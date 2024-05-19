@@ -30,7 +30,7 @@ const LoginPage = () => {
       <div className="mt-20">
         <div className="mb-4">
           <input
-            className="px-2 py-1 bg-transparent border border-neutral-300 focus:border-primary text-sm placeholder-neutral-300 caret-secondary"
+            className="px-2 py-1 bg-transparent border-b border-neutral-300 focus:border-primary text-sm placeholder-neutral-300 caret-secondary"
             placeholder="Enter Login Id"
             value={loginId}
             onChange={(e) => {
@@ -40,7 +40,7 @@ const LoginPage = () => {
         </div>
         <div className="mb-4">
           <input
-            className="px-2 py-1 bg-transparent border border-neutral-300 focus:border-primary text-sm placeholder-neutral-300 caret-secondary"
+            className="px-2 py-1 bg-transparent border-b border-neutral-300 focus:border-primary text-sm placeholder-neutral-300 caret-secondary"
             placeholder="Enter Password"
             value={password}
             onChange={(e) => {
