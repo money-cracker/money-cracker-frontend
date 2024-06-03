@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { useLocalStorage } from '../../hook/useLocalStorage'
+import { Button } from '../components/common/atoms/Button/Button'
 
 const LoginPage = () => {
   const { setAuthenticated } = useContext(AuthContext)
@@ -22,15 +23,16 @@ const LoginPage = () => {
       navigate('/')
     }
   }, [])
+
   return (
     <div className="page">
       <div>
-        <div className="text-4xl font-semibold">Money Cracker</div>
+        <div className="text-3xl font-semibold font-press">Money Cracker</div>
       </div>
       <div className="mt-20">
-        <div className="mb-4">
+        <div className="mb-6">
           <input
-            className="px-2 py-1 bg-transparent border-b border-neutral-300 focus:border-primary text-sm placeholder-neutral-300 caret-secondary"
+            className="rounded-none w-[80%] px-2 py-1 bg-transparent border-b border-neutral-300 focus:border-primary text-sm placeholder-neutral-300 caret-secondary"
             placeholder="Enter Login Id"
             value={loginId}
             onChange={(e) => {
@@ -38,9 +40,9 @@ const LoginPage = () => {
             }}
           />
         </div>
-        <div className="mb-4">
+        <div>
           <input
-            className="px-2 py-1 bg-transparent border-b border-neutral-300 focus:border-primary text-sm placeholder-neutral-300 caret-secondary"
+            className="rounded-none w-[80%] px-2 py-1 bg-transparent border-b border-neutral-300 focus:border-primary text-sm placeholder-neutral-300 caret-secondary"
             placeholder="Enter Password"
             value={password}
             onChange={(e) => {
@@ -48,12 +50,26 @@ const LoginPage = () => {
             }}
           />
         </div>
-        <button
-          className="px-4 py-1 rounded-sm bg-primary"
+      </div>
+      <div className="mt-16">
+        <Button
+          className="py-3 rounded"
           onClick={() => handleLogin()}
+          width={'100%'}
         >
-          <span className="text-sm font-medium text-white">Login</span>
-        </button>
+          Login
+        </Button>
+
+        <div className="flex justify-center">
+          <Button
+            className="py-3 rounded mt-4"
+            variant="text"
+            onClick={() => handleLogin()}
+            width={120}
+          >
+            Register
+          </Button>
+        </div>
       </div>
     </div>
   )

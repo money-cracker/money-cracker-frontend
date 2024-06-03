@@ -1,0 +1,19 @@
+.mc-button {
+  @apply flex items-center justify-center active:scale-[0.98] transition transform duration-150;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}
+
+.mc-button[data-color='primary'][data-variant='contained'] {
+  @apply bg-[#58378F] active:bg-[#4A2E77] text-white font-semibold text-base;
+}
+
+.mc-button[data-color='primary'][data-variant='text'] {
+  @apply bg-[#FFFFFF] active:bg-[#F1EAFC] text-[#58378F] font-medium text-base;
+}
+
+.mc-button[data-color='primary'][data-variant='outlined'] {
+  @apply bg-[#FFFFFF] active:bg-[#F1EAFC] text-[#58378F] border border-[#58378F] font-medium text-base;
+}
