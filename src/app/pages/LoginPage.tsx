@@ -30,9 +30,9 @@ const LoginPage = () => {
         <div className="text-3xl font-semibold font-press">Money Cracker</div>
       </div>
       <div className="mt-20">
-        <div className="mb-6">
+        <div className="mb-6 flex items-center">
           <input
-            className="rounded-none w-[80%] px-2 py-1 bg-transparent border-b border-neutral-300 focus:border-primary text-sm placeholder-neutral-300 caret-secondary"
+            className="rounded-none w-full px-2 py-1 bg-transparent border-b border-neutral-300 focus:border-primary text-base placeholder-neutral-300 caret-secondary"
             placeholder="Enter Login Id"
             value={loginId}
             onChange={(e) => {
@@ -42,7 +42,7 @@ const LoginPage = () => {
         </div>
         <div>
           <input
-            className="rounded-none w-[80%] px-2 py-1 bg-transparent border-b border-neutral-300 focus:border-primary text-sm placeholder-neutral-300 caret-secondary"
+            className="rounded-none w-full px-2 py-1 bg-transparent border-b border-neutral-300 focus:border-primary text-base placeholder-neutral-300 caret-secondary"
             placeholder="Enter Password"
             value={password}
             onChange={(e) => {
@@ -62,7 +62,7 @@ const LoginPage = () => {
 
         <div className="flex justify-center">
           <Button
-            className="py-3 rounded mt-4"
+            className="rounded-t py-2 mt-3"
             variant="text"
             onClick={() => handleLogin()}
             width={120}
