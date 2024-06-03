@@ -12,6 +12,7 @@ import ProfilePage from './pages/ProfilePage'
 import { AuthContext, AuthProvider } from './context/AuthContext'
 import { useContext } from 'react'
 import LoginPage from './pages/LoginPage'
+import { SetupAccount } from './pages/SetupAccount'
 
 export const App = () => {
   const PrivateRoutes = () => {
@@ -32,6 +33,7 @@ export const App = () => {
               <Route path="/" element={<Navigate to="/home" replace />} />
               <Route path="/home" element={<HomePage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/profile/setup" element={<SetupAccount />} />
             </Route>
           </Routes>
         </AuthProvider>

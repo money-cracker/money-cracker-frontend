@@ -5,7 +5,10 @@ import { PhosphorIcon } from './common/atoms/PhosphorIcon'
 const BottomTabNavigator = () => {
   const location = useLocation()
   const isActive = (path: string) => location.pathname === path
-  if (location.pathname === '/login') {
+  if (
+    location.pathname === '/login' ||
+    location.pathname === '/profile/setup'
+  ) {
     return <></>
   }
   return (
